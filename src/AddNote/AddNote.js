@@ -18,17 +18,14 @@ export default class AddNote extends Component {
   handleClickAdd = e => {
     e.preventDefault()
 
-    console.log(e)
-    const { name, content, folderId } = e.target
+    const { noteName, contentInput, folder } = e.target
     
     const newNote = {
-      name: name.value,
-      content: content.value,
-      folderId: folderId.value
-      
+      name: noteName.value,
+      content: contentInput.value,
+      folderId: folder.value
     }
-    console.log(e.target)
-
+  
     fetch(`${config.API_ENDPOINT}/notes`, {
       method: 'POST',
       headers: {
@@ -43,7 +40,7 @@ export default class AddNote extends Component {
       })
       .then(() => {
         this.context.addNote(newNote)
-        // this.props.onDeleteNote(noteId)
+        this.props.history.push(`/folder/${newNote.folderId}`)
       })
       .catch(error => {
         console.error({ error })
@@ -58,24 +55,24 @@ export default class AddNote extends Component {
     return (
       <section className='AddNote'>
         <h2>Create a note</h2>
-        <NotefulForm>
+        <NotefulForm onSubmit={this.handleClickAdd}>
           <div className='noteField'>
             <label htmlFor='note-name-input'>
               Name
             </label>
-            <input type='text' id='note-name-input' />
+            <input type='text' id='note-name-input' name="noteName" />
           </div>
           <div className='bodyField'>
             <label htmlFor='note-content-input'>
               Content
             </label>
-            <textarea id='note-content-input' />
+            <textarea id='note-content-input' name="contentInput" />
           </div>
           <div className='field'>
             <label htmlFor='note-folder-select'>
               Folder
             </label>
-            <select id='note-folder-select'>
+            <select id='note-folder-select' name="folder">
               <option value={null}>...</option>
               {folders.map(folder =>
                 <option key={folder.id} value={folder.id}>
@@ -85,9 +82,7 @@ export default class AddNote extends Component {
             </select>
           </div>
           <div className='buttons'>
-            <button type='submit' onClick={this.handleClickAdd(
-              <Note {...this.noteField.value} {...this.bodyField.value} {...`11/11/2019`} />
-            )}>
+            <button type='submit'>
               Add note
             </button>
           </div>

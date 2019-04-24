@@ -44,7 +44,7 @@ class App extends Component {
 
   handleAddNote = note => {
     this.setState({
-      notes: this.state.notes.push(note)
+      notes: [...this.state.notes, note]
     })
   }
 
