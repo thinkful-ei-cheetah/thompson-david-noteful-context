@@ -42,6 +42,12 @@ class App extends Component {
   }
 
 
+  handleAddNote = note => {
+    this.setState({
+      notes: this.state.notes.push(note)
+    })
+  }
+
   handleDeleteNote = noteId => {
     this.setState({
       notes: this.state.notes.filter(note => note.id !== noteId)
@@ -107,6 +113,7 @@ class App extends Component {
       notes: this.state.notes,
       folders: this.state.folders,
       deleteNote: this.handleDeleteNote,
+      addNote: this.handleAddNote,
     }
     return (
       <Context.Provider value={value}>
