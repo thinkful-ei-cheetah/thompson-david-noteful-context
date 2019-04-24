@@ -3,13 +3,39 @@ import { Link } from 'react-router-dom'
 import { format } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './Note.css'
+import Context from '../Context'
+import config from '../config'
 
-export default function Note(props) {
+export default class Note extends React.Component {
+static defaultProps = {
+    onDeleteNote: () => { },
+  }
+
+  static Context = Context;
+
+  handleClickDelete = e => {
+    e.preventDefault()
+    const noteId = this.props.id
+
+    fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      },
+    })
+      .then(() => {
+        this.context.deleteNote(noteId)
+        this.props.onDeleteNote(noteId)
+      })
+  }
+
+render(){
+  const { name, id, modified } = this.props
   return (
     <div className='Note'>
       <h2 className='Note__title'>
-        <Link to={`/note/${props.id}`}>
-          {props.name}
+        <Link to={`/note/${id}`}>
+          {name}
         </Link>
       </h2>
       <button className='Note__delete' type='button'>
@@ -22,10 +48,11 @@ export default function Note(props) {
           Modified
           {' '}
           <span className='Date'>
-            {format(props.modified, 'Do MMM YYYY')}
+            {format(modified, 'Do MMM YYYY')}
           </span>
         </div>
       </div>
     </div>
   )
+}
 }
