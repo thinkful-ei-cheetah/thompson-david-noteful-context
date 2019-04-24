@@ -11,7 +11,7 @@ static defaultProps = {
     onDeleteNote: () => { },
   }
 
-  static Context = Context;
+  static contextType = Context;
 
   handleClickDelete = e => {
     e.preventDefault()
@@ -23,9 +23,17 @@ static defaultProps = {
         'content-type': 'application/json'
       },
     })
+      .then(res => {
+        if (!res.ok)
+          return res.json().then(e => Promise.reject(e))
+        return res.json()
+      })
       .then(() => {
         this.context.deleteNote(noteId)
         this.props.onDeleteNote(noteId)
+      })
+      .catch(error => {
+        console.error({ error })
       })
   }
 
@@ -38,7 +46,7 @@ render(){
           {name}
         </Link>
       </h2>
-      <button className='Note__delete' type='button'>
+      <button className='Note__delete' type='button' onClick={this.handleClickDelete}>
         <FontAwesomeIcon icon='trash-alt' />
         {' '}
         remove
