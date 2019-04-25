@@ -1,47 +1,30 @@
-// import React, { Component } from 'react'
-// import NotefulForm from '../NotefulForm/NotefulForm'
-// import './AddFolder.css'
-
-// export default class AddFolder extends Component {
-//   render() {
-//     return (
-//       <section className='AddFolder'>
-//         <h2>Create a folder</h2>
-//         <NotefulForm>
-//           <div className='field'>
-//             <label htmlFor='folder-name-input'>
-//               Name
-//             </label>
-//             <input type='text' id='folder-name-input' />
-//           </div>
-//           <div className='buttons'>
-//             <button type='submit'>
-//               Add folder
-//             </button>
-//           </div>
-//         </NotefulForm>
-//       </section>
-//     )
-//   }
-// }
-
-
-
-
 import React, { Component } from 'react'
 import NotefulForm from '../NotefulForm/NotefulForm'
 import './AddFolder.css'
 import context from '../Context'
 import config from '../config'
 
-
 export default class AddFolder extends Component {
+  state = {
+    error: null,
+  }
+  
+  validateFolderName = folderName => {
+    console.log(folderName)
+    if (folderName.replace(/[\s-]/g, '') === '') {
+      this.setState({ error: 'Folder name cannot be all spaces.' })
+      return false
+    }
+    return true
+  }  
+    
   static defaultProps = {
     history: {
       push: () => { }
     },
-  }
+  } 
   static contextType = context;
+
 
   handleClickAdd = e => {
     e.preventDefault()
@@ -50,6 +33,12 @@ export default class AddFolder extends Component {
 
     const newFolder = {
       name: folderName.value,
+    }
+
+    this.setState({ error: null })
+    if (!this.validateFolderName(newFolder.name)) {
+      console.log(this.state.error)
+      return this.render()
     }
 
     fetch(`${config.API_ENDPOINT}/folders`, {
@@ -67,25 +56,26 @@ export default class AddFolder extends Component {
       .then(() => {
         this.context.addFolder(newFolder)
         this.props.history.push(`/folder/${newFolder.id}`)
-        console.log(newFolder.id)
       })
       .catch(error => {
         console.error({ error })
+        this.setState({ error })
       })
   }
 
-
-
-
-
-
-
   render() {
+    const { error } = this.state
+    console.log('rendering')
+    console.log(error)
+
     return (
       <section className='AddFolder'>
         <h2>Create a folder</h2>
         <NotefulForm to='/' onSubmit={this.handleClickAdd}>
           <div className='field'>
+            <div className='AddFolder_error' role='alert'>
+              {error && <p>{error}</p>}
+            </div>
             <label htmlFor='folder-name-input'>
               Name
             </label>

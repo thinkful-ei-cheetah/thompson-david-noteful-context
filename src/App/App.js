@@ -7,6 +7,7 @@ import NoteListMain from '../NoteListMain/NoteListMain'
 import NotePageMain from '../NotePageMain/NotePageMain'
 import AddFolder from '../AddFolder/AddFolder'
 import AddNote from '../AddNote/AddNote'
+import ErrorPage from '../ErrorPage/ErrorPage'
 import './App.css'
 import Context from '../Context'
 import config from '../config'
@@ -127,21 +128,23 @@ class App extends Component {
     }
     return (
       <Context.Provider value={value}>
-        <div className='App'>
-          <nav className='App__nav'>
-            {this.renderNavRoutes()}
-          </nav>
-          <header className='App__header'>
-            <h1>
-              <Link to='/'>Noteful</Link>
-              {' '}
-              <FontAwesomeIcon icon='check-double' />
-            </h1>
-          </header>
-          <main className='App__main'>
-            {this.renderMainRoutes()}
-          </main>
-        </div>
+        <ErrorPage>
+          <div className='App'>
+            <nav className='App__nav'>
+              {this.renderNavRoutes()}
+            </nav>
+            <header className='App__header'>
+              <h1>
+                <Link to='/'>Noteful</Link>
+                {' '}
+                <FontAwesomeIcon icon='check-double' />
+              </h1>
+            </header>
+            <main className='App__main'>
+              {this.renderMainRoutes()}
+            </main>
+          </div>
+        </ErrorPage>
       </Context.Provider>
     )
   }
