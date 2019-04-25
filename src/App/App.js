@@ -57,10 +57,13 @@ class App extends Component {
 
   handleAddFolder = folder => {
     this.setState({
-      folders: [
-        ...this.state.folders,
-        folder
-      ]
+      folders: [...this.state.folders, folder]
+    })
+  }
+
+  handleDeleteFolder = folderId => {
+    this.setState({
+      folders: this.state.folders.filter(folder => folder.id !== folderId)
     })
   }
 
@@ -125,6 +128,7 @@ class App extends Component {
       deleteNote: this.handleDeleteNote,
       addNote: this.handleAddNote,
       addFolder: this.handleAddFolder,
+      deleteFolder: this.handleDeleteFolder,
     }
     return (
       <Context.Provider value={value}>

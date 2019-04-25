@@ -28,6 +28,7 @@
   max-width: 180px;
   padding: 8px 16px;
   text-decoration: none;
+  height: 60px;
 }
 .NoteListNav__folder-link:hover {
   color: #FFB72F;
@@ -43,3 +44,26 @@
   float: right;
   font-size: 10px;
 }
+
+.NoteListNav__folder_delete {
+  
+  background-color: #041a3a;
+  color: #bdbcbc;
+  border: 0;
+  transform-origin: right bottom;
+  /* transform: rotate(-90deg); */
+  position: relative;
+  top: 0;
+  right: 0;
+}
+
+.NoteListNav__folder_delete:hover {
+  background-color: #bd0909;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* li.NoteListNav__li {
+  height: 80px;
+} */

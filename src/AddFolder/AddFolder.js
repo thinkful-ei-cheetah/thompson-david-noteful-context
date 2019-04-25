@@ -79,7 +79,7 @@ export default class AddFolder extends Component {
             <label htmlFor='folder-name-input'>
               Name
             </label>
-            <input type='text' id='folder-name-input' name='folderName' />
+            <input type='text' id='folder-name-input' name='folderName' required/>
           </div>
           <div className='buttons'>
             <button type='submit'>
