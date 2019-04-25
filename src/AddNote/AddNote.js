@@ -6,12 +6,7 @@ import context from '../Context'
 import Note from '../Note/Note'
 
 export default class AddNote extends Component {
-  // static defaultProps = {
-    
-  // }
 
-
- 
 
  static contextType = context;
 
@@ -39,15 +34,12 @@ export default class AddNote extends Component {
         return res.json()
       })
       .then(() => {
-        this.context.addNote(newNote)
         this.props.history.push(`/folder/${newNote.folderId}`)
       })
       .catch(error => {
         console.error({ error })
       })
   }
-
-
 
   
   render() {
