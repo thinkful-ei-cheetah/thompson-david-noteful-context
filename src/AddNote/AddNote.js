@@ -3,7 +3,7 @@ import NotefulForm from '../NotefulForm/NotefulForm'
 import './AddNote.css'
 import config from '../config'
 import context from '../Context'
-import Note from '../Note/Note'
+
 
 export default class AddNote extends Component {
 
@@ -18,7 +18,8 @@ export default class AddNote extends Component {
     const newNote = {
       name: noteName.value,
       content: contentInput.value,
-      folderId: folder.value
+      folderId: folder.value,
+      modified: new Date()
     }
   
     fetch(`${config.API_ENDPOINT}/notes`, {
@@ -33,8 +34,11 @@ export default class AddNote extends Component {
           return res.json().then(e => Promise.reject(e))
         return res.json()
       })
+      
       .then(() => {
+        this.context.addNote(newNote)
         this.props.history.push(`/folder/${newNote.folderId}`)
+        
       })
       .catch(error => {
         console.error({ error })

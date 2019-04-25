@@ -123,7 +123,7 @@ class App extends Component {
       folders: this.state.folders,
       deleteNote: this.handleDeleteNote,
       addNote: this.handleAddNote,
-      deleteFolder: this.handleAddFolder,
+      addFolder: this.handleAddFolder,
     }
     return (
       <Context.Provider value={value}>
