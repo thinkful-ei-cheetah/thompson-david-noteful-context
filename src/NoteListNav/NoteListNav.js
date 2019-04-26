@@ -9,21 +9,44 @@ import config from '../config'
 
 
 export default class NoteListNav extends React.Component {
-  static defaultProps = {
-    onDeleteFolder: () => { },
-  }
+  
   static contextType = Context
 
   handleClickDelete = e => {
   
     const folderId = e.currentTarget.value
 
-    fetch(`${config.API_ENDPOINT}/folders/${folderId}`, {
-      method: 'DELETE',
-      headers: {
-        'content-type': 'application/json'
-      },
+    console.log(folderId)
+
+    console.log(this.context.notes)
+
+    this.context.notes.map(note => {
+      if (note.folderId === folderId) {
+        console.log('HIT')
+        fetch(`${config.API_ENDPOINT}/notes/${note.id}`, {
+          method: 'DELETE',
+          headers: {
+            'content-type': 'application/json'
+          },
+        })
+          .then(res => {
+            if (!res.ok)
+              return res.json().then(e => Promise.reject(e))
+            return res.json()
+          })
+          .then(() => {
+            this.context.deleteNote(note.id)
+          })
+      }
+      return note
     })
+    
+    fetch(`${config.API_ENDPOINT}/folders/${folderId}`, {
+        method: 'DELETE',
+        headers: {
+          'content-type': 'application/json'
+        },
+      })
       .then(res => {
         if (!res.ok)
           return res.json().then(e => Promise.reject(e))
@@ -31,11 +54,7 @@ export default class NoteListNav extends React.Component {
       })
       .then(() => {
         this.context.deleteFolder(folderId)
-        this.props.onDeleteFolder(folderId)
-        // this.props.notes.map(note => {
-        //   if (note.folderId === folderId) {
-        //     this.context.deleteNote(note.id)
-        //   }})
+        this.props.history.push('/')
         })
       .catch(error => {
         console.error({ error })

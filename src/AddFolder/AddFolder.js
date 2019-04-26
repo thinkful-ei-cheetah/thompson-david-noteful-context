@@ -3,7 +3,7 @@ import NotefulForm from '../NotefulForm/NotefulForm'
 import './AddFolder.css'
 import context from '../Context'
 import config from '../config'
-import cuid from 'cuid';
+import cuid from 'cuid'
 
 export default class AddFolder extends Component {
   state = {
