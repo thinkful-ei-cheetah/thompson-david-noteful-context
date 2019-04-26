@@ -46,15 +46,11 @@
 }
 
 .NoteListNav__folder_delete {
-  
   background-color: #041a3a;
   color: #bdbcbc;
   border: 0;
-  transform-origin: right bottom;
-  /* transform: rotate(-90deg); */
   position: relative;
-  top: 0;
-  right: 0;
+  float:right;
 }
 
 .NoteListNav__folder_delete:hover {

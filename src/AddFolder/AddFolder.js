@@ -3,6 +3,7 @@ import NotefulForm from '../NotefulForm/NotefulForm'
 import './AddFolder.css'
 import context from '../Context'
 import config from '../config'
+import cuid from 'cuid';
 
 export default class AddFolder extends Component {
   state = {
@@ -33,6 +34,7 @@ export default class AddFolder extends Component {
 
     const newFolder = {
       name: folderName.value,
+      id: cuid(),
     }
 
     this.setState({ error: null })
