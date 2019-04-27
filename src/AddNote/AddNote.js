@@ -3,6 +3,7 @@ import NotefulForm from '../NotefulForm/NotefulForm'
 import './AddNote.css'
 import config from '../config'
 import context from '../Context'
+import cuid from 'cuid'
 
 
 
@@ -28,6 +29,7 @@ export default class AddNote extends Component {
     const { noteName, contentInput, folder } = e.target
 
     const newNote = {
+      id: cuid(),
       name: noteName.value,
       content: contentInput.value,
       folderId: folder.value,
@@ -56,7 +58,6 @@ export default class AddNote extends Component {
       .then(() => {
         this.context.addNote(newNote)
         this.props.history.push(`/folder/${newNote.folderId}`)
-        
       })
       .catch(error => {
         console.error({ error })

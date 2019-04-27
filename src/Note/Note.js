@@ -7,7 +7,7 @@ import Context from '../Context'
 import config from '../config'
 
 export default class Note extends React.Component {
-static defaultProps = {
+  static defaultProps = {
     onDeleteNote: () => { },
   }
 
