@@ -1,5 +1,6 @@
 import React from 'react'
 import './NotefulForm.css'
+import PropTypes from 'prop-types'
 
 export default function NotefulForm(props) {
   const { className, onSubmit,...otherProps } = props
@@ -13,3 +14,4 @@ export default function NotefulForm(props) {
     />
   )
 }
+NotefulForm.propTypes = { onSubmit: PropTypes.func }

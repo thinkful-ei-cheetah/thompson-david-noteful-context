@@ -4,6 +4,7 @@ import './AddFolder.css'
 import context from '../Context'
 import config from '../config'
 import cuid from 'cuid'
+import PropTypes from 'prop-types'
 
 export default class AddFolder extends Component {
   state = {
@@ -93,3 +94,5 @@ export default class AddFolder extends Component {
     )
   }
 }
+
+AddFolder.propTypes = { history: PropTypes.object }

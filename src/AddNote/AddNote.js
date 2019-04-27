@@ -4,6 +4,7 @@ import './AddNote.css'
 import config from '../config'
 import context from '../Context'
 import cuid from 'cuid'
+import PropTypes from 'prop-types'
 
 
 
@@ -109,3 +110,4 @@ export default class AddNote extends Component {
     )
   }
 }
+AddNote.propTypes = {history: PropTypes.object}

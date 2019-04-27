@@ -6,6 +6,7 @@ import { countNotesForFolder } from '../notes-helpers'
 import './NoteListNav.css'
 import Context from '../Context'
 import config from '../config'
+import PropTypes from 'prop-types'
 
 
 export default class NoteListNav extends React.Component {
@@ -102,4 +103,6 @@ export default class NoteListNav extends React.Component {
     )
   }
 }
+
+NoteListNav.propTypes = { history: PropTypes.object }
 
