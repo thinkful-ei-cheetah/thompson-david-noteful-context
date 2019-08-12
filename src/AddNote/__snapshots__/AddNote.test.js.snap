@@ -7,10 +7,16 @@ exports[`AddNote component renders the complete form 1`] = `
   <h2>
     Create a note
   </h2>
-  <NotefulForm>
+  <NotefulForm
+    onSubmit={[Function]}
+  >
     <div
-      className="field"
+      className="noteField"
     >
+      <div
+        className="AddFolder_error"
+        role="alert"
+      />
       <label
         htmlFor="note-name-input"
       >
@@ -18,11 +24,13 @@ exports[`AddNote component renders the complete form 1`] = `
       </label>
       <input
         id="note-name-input"
+        name="noteName"
+        required={true}
         type="text"
       />
     </div>
     <div
-      className="field"
+      className="bodyField"
     >
       <label
         htmlFor="note-content-input"
@@ -31,6 +39,7 @@ exports[`AddNote component renders the complete form 1`] = `
       </label>
       <textarea
         id="note-content-input"
+        name="contentInput"
       />
     </div>
     <div
@@ -43,6 +52,7 @@ exports[`AddNote component renders the complete form 1`] = `
       </label>
       <select
         id="note-folder-select"
+        name="folder"
       >
         <option
           value={null}
@@ -67,29 +77,12 @@ exports[`AddNote component renders the complete form 1`] = `
 exports[`AddNote component renders the select options from folders 1`] = `
 <select
   id="note-folder-select"
+  name="folder"
 >
   <option
     value={null}
   >
     ...
-  </option>
-  <option
-    key="b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1"
-    value="b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1"
-  >
-    Important
-  </option>
-  <option
-    key="b07161a6-ffaf-11e8-8eb2-f2801f1b9fd1"
-    value="b07161a6-ffaf-11e8-8eb2-f2801f1b9fd1"
-  >
-    Super
-  </option>
-  <option
-    key="b07162f0-ffaf-11e8-8eb2-f2801f1b9fd1"
-    value="b07162f0-ffaf-11e8-8eb2-f2801f1b9fd1"
-  >
-    Spangley
   </option>
 </select>
 `;
